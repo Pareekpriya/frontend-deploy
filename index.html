@@ -6,8 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <input id="user" type="text" placeholder="Enter Name of the User">
-    <button id="newUser">Add New User</button>
+    
+        <input id="user" type="text" placeholder="Enter Name of the User">
+        <button id="newUser">Add New User</button>
+    
+  
+        <button id="update">Update User of Id1</button>
+
+    <button id="getUser">Retrive all users</button>
+
+    <button id="delete">Delete User of Id1</button>
+    
 </body>
  <script>
     const newUser = document.getElementById("newUser").addEventListener("click", async function performCURD(){
@@ -26,5 +35,48 @@
     }
 }
     )
+
+     const getUser = document.getElementById("getUser").addEventListener("click", async function getAllUsers(){
+        try{
+            let res = await fetch("https://few-wholesale-deltadromeus.glitch.me/users")
+            let data = await res.json()
+            console.log(data) 
+        }
+       
+        catch(err){
+          console.log("err",err)
+        }
+        
+     })
+    
+    const updateUser = document.getElementById("update").addEventListener("click",async function updateUser() {
+        try{
+         let res = await fetch("https://few-wholesale-deltadromeus.glitch.me/users/1",{
+            method:"PATCH",
+            headers:{
+                "Content-Text":"application/json"
+            },
+            body:JSON.stringify({name:"Alice"})
+         })
+         alert("User updated")
+
+        }catch(err){
+         console.log("err",err)
+        }
+        
+    }) 
+
+    let deleteUser = document.getElementById("delete").addEventListener("click",async function deleteUser() {
+        try{
+         const deleteUser = await fetch("https://few-wholesale-deltadromeus.glitch.me/users/1",{
+            method:"DELETE"
+         })
+         alert("user deleted")
+        }catch(err){
+            console.log("err",err)
+        }
+        
+    })
+
  </script>
 </html>
