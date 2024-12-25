@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="user" type="text" placeholder="Enter Name of the User">
+    <button id="newUser">Add New User</button>
+</body>
+ <script>
+    const newUser = document.getElementById("newUser").addEventListener("click", async function performCURD(){
+        let name = document.getElementById("user").value
+        try{
+        let res = await fetch("https://few-wholesale-deltadromeus.glitch.me/users",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({name})
+        })
+        alert("user added")
+    }catch(err){
+        console.log("err",err)
+    }
+}
+    )
+ </script>
+</html>
